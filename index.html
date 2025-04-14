@@ -58,7 +58,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#terraform-selectel" class="md-skip">
+        <a href="#no1-fastapi" class="md-skip">
           Skip to content
         </a>
       
@@ -233,20 +233,35 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#terraform" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Terraform
+      Создание базы данных
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Создание базы данных">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#postgres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Создание бд в postgres
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#ansible" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      Ansible
+      Создание моделей
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -285,20 +300,35 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#terraform" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Terraform
+      Создание базы данных
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Создание базы данных">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#postgres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Создание бд в postgres
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#ansible" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      Ansible
+      Создание моделей
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -317,123 +347,114 @@
                   
 
 
-<h1 id="terraform-selectel">Жижилева Арина. Практическое задание работа с terraform и облаком selectel.</h1>
-<p>В данной практике необходимо создать инфраструктуру в проекте Selectel с помощью terraform и сконфигурировать веб-сервисы с помощью ansible 
-Нужно создать n=2 виртуальные машины, одну для todo app, другую для mysql DB.</p>
+<h1 id="no1-fastapi">Лабораторная работа №1 Реализация серверного приложения FastAPI</h1>
+<p>Цели</p>
+<p>Научится реализовывать полноценное серверное приложение с помощью фреймворка FastAPI с применением дополнительных средств и библиотек.</p>
+<p><strong>Тема: Разработка веб-приложения для буккросинга.</strong></p>
+<p>Ваша задача - создать веб-приложение, которое позволит пользователям обмениваться книгами между собой. Это приложение должно облегчать процесс обмена книгами, позволяя пользователям находить книги, которые им интересны, и находить новых пользователей для обмена книгами. </p>
+<p><strong>Функционал веб-приложения должен включать следующее:</strong></p>
+<p><strong>Создание профилей</strong>: Возможность пользователям создавать профили, указывать информацию о себе, своих навыках, опыте работы и предпочтениях по проектам.</p>
+<p><strong>Добавление книг в библиотеку</strong>: Пользователи могут добавлять книги, которыми они готовы поделиться, в свою виртуальную библиотеку на платформе.</p>
+<p><strong>Поиск и запросы на обмен</strong>: Функционал поиска книг в библиотеке других пользователей. Возможность отправлять запросы на обмен книгами другим пользователям.</p>
+<p><strong>Управление запросами и обменами</strong>: Возможность просмотра и управления запросами на обмен. Возможность подтверждения или отклонения запросов на обмен.</p>
+<p><strong>Критерии модели данных:</strong></p>
 <ol>
-<li>Необходимо развернуть n количество ВМ с атрибутом прерываемый</li>
-<li>Развернуть необходимые подсети</li>
-<li>Создать публичный ssh ключ и приатачить к ВМ</li>
-<li>Создать загружаемый диск с ubuntu 22.04</li>
-<li>Создать flavor 1CPU 2 gb RAM, Диск объем 10гб на каждую вм (базовый hdd)</li>
-<li>Для каждой ВМ зафиксировать публичный ip адрес</li>
-<li>В output зафиксировать вывод ip адрес и команду ssh для полключения</li>
-<li>Создать файл inventory.ini для ansible, где описаны айпи адреса созданных ВМ</li>
+<li>5 или больше таблиц</li>
+<li>Связи many-to-many и one-to-many</li>
+<li>Ассоциативная сущность должна иметь поле, характеризующее связь, помимо ссылок на связанные таблицы</li>
 </ol>
-<h2 id="terraform">Terraform</h2>
-<p>Создала файл main.tf с подключением к openstack, созданием ssh ключей, подключением сетей и созданием серверов. В этом файле также задаются публичные ip-адреса для машин и создается вывод информации о ресурсах. </p>
-<p><strong>код из файла main.tf:</strong></p>
-<pre><code class="language-json">provider &quot;openstack&quot; {
-  auth_url    = &quot;https://cloud.api.selcloud.ru/identity/v3&quot;
-  domain_name = var.domain_name
-  tenant_id   = var.tenant_id
-  user_name   = var.user_name
-  password    = var.password
-  region      = var.region
-}
-
-# 1. SSH-ключ
-module &quot;keypair&quot; {
-  source             = &quot;./modules/keypair&quot;
-  keypair_name       = &quot;tf_keypair&quot;
-  keypair_public_key = file(&quot;~/.ssh/id_rsa.pub&quot;)
-  region             = var.region
-}
-
-# 2. Сеть и подсеть
-module &quot;nat&quot; {
-  source = &quot;./modules/nat&quot;
-}
-
-# 3. Серверы
-module &quot;preemptible_server&quot; {
-  count  = 2
-  source = &quot;./modules/server_remote_root_disk&quot;
-
-  server_name         = var.server_name
-  server_zone         = var.server_zone
-  server_vcpus        = var.server_vcpus
-  server_ram_mb       = var.server_ram_mb
-  server_root_disk_gb = var.server_root_disk_gb
-  server_volume_type  = var.server_volume_type
-  server_image_name   = var.server_image_name
-  server_ssh_key      = module.keypair.keypair_name
-  region              = var.region
-  network_id          = module.nat.network_id
-  subnet_id           = module.nat.subnet_id
-
-  server_preemptible_tag = var.server_preemptible_tag
-}
+<p><img alt="" src="images/web.drawio%281%29.png" /></p>
+<h2 id="_1">Создание базы данных</h2>
+<h3 id="postgres">Создание бд в postgres</h3>
+<ol>
+<li>через win+r services.msc запускаю postgres.</li>
+<li>в cmd psql -U postgres</li>
+<li>CREATE DATABASE book_exchange;</li>
+</ol>
+<h3 id="_2">Создание моделей</h3>
+<p><strong>код из файла models.py:</strong></p>
+<pre><code class="language-python">from typing import Optional, List
+from datetime import datetime
+from sqlmodel import SQLModel, Field, Relationship
 
 
-# 4. Публичные IP-адреса
-resource &quot;openstack_networking_floatingip_v2&quot; &quot;todo_fip&quot; {
-  pool = &quot;external-network&quot;
-}
+# ---------- USER ----------
+class User(SQLModel, table=True):
+    user_id: Optional[int] = Field(default=None, primary_key=True)
+    username: str = Field(index=True, unique=True)
+    email: str = Field(unique=True, index=True)
+    password_hash: str
+    profile_info: Optional[str] = None
+    skills: Optional[str] = None
+    preferences: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
 
-resource &quot;openstack_networking_floatingip_v2&quot; &quot;mysql_fip&quot; {
-  pool = &quot;external-network&quot;
-}
+    books: List[&quot;UserBook&quot;] = Relationship(back_populates=&quot;user&quot;)
+    sent_requests: List[&quot;ExchangeRequest&quot;] = Relationship(back_populates=&quot;sender&quot;, sa_relationship_kwargs={&quot;foreign_keys&quot;: &quot;[ExchangeRequest.sender_id]&quot;})
+    received_requests: List[&quot;ExchangeRequest&quot;] = Relationship(back_populates=&quot;receiver&quot;, sa_relationship_kwargs={&quot;foreign_keys&quot;: &quot;[ExchangeRequest.receiver_id]&quot;})
 
-# Привязка IP к серверам
-resource &quot;openstack_compute_floatingip_associate_v2&quot; &quot;todo_fip_associate&quot; {
-  floating_ip = openstack_networking_floatingip_v2.todo_fip.address
-  instance_id = module.preemptible_server[0].server_id
-  depends_on  = [openstack_networking_floatingip_v2.todo_fip]  # Ensure floating IP is created before association
-}
 
-resource &quot;openstack_compute_floatingip_associate_v2&quot; &quot;mysql_fip_associate&quot; {
-  floating_ip = openstack_networking_floatingip_v2.mysql_fip.address
-  instance_id = module.preemptible_server[1].server_id
-  depends_on  = [openstack_networking_floatingip_v2.mysql_fip]  # Ensure floating IP is created before association
-}
+# ---------- BOOK ----------
+class Book(SQLModel, table=True):
+    book_id: Optional[int] = Field(default=None, primary_key=True)
+    title: str
+    author: str
+    isbn: Optional[str] = None
+    genre: str
+    publication_year: int
+    condition: str
+    description: Optional[str] = None
 
-# 5. Вывод информации о ресурсах
-output &quot;todo_app_ip&quot; {
-  value = openstack_networking_floatingip_v2.todo_fip.address
-}
+    owners: List[&quot;UserBook&quot;] = Relationship(back_populates=&quot;book&quot;)
 
-output &quot;mysql_db_ip&quot; {
-  value = openstack_networking_floatingip_v2.mysql_fip.address
-}
 
-# Создание inventory файла для ansible
-resource &quot;local_file&quot; &quot;ansible_inventory&quot; {
-  content = templatefile(&quot;./resources/inventory.tmpl&quot;,
-    {
-      webapp_vm_ip_public  = module.preemptible_server.0.floating_ip,
-      database_vm_ip_public      = module.preemptible_server.1.floating_ip,
-      webapp_vm_ip_nat     = module.preemptible_server.1.nat_ip.0
-    }
-  )
-  filename = &quot;../ansible/inventory.ini&quot;
-}
+# ---------- USERBOOK ----------
+class UserBook(SQLModel, table=True):
+    user_book_id: Optional[int] = Field(default=None, primary_key=True)
+    user_id: int = Field(foreign_key=&quot;user.user_id&quot;)
+    book_id: int = Field(foreign_key=&quot;book.book_id&quot;)
+    added_at: datetime = Field(default_factory=datetime.utcnow)
+    status: str  # доступна / недоступна
+    location: Optional[str] = None
+
+    user: &quot;User&quot; = Relationship(back_populates=&quot;books&quot;)
+    book: &quot;Book&quot; = Relationship(back_populates=&quot;owners&quot;)
+
+    sender_requests: List[&quot;ExchangeRequest&quot;] = Relationship(back_populates=&quot;sender_book&quot;, sa_relationship_kwargs={&quot;foreign_keys&quot;: &quot;[ExchangeRequest.sender_book_id]&quot;})
+    receiver_requests: List[&quot;ExchangeRequest&quot;] = Relationship(back_populates=&quot;desired_book&quot;, sa_relationship_kwargs={&quot;foreign_keys&quot;: &quot;[ExchangeRequest.desired_book_id]&quot;})
+
+
+# ---------- EXCHANGEREQUEST ----------
+class ExchangeRequest(SQLModel, table=True):
+    request_id: Optional[int] = Field(default=None, primary_key=True)
+    sender_id: int = Field(foreign_key=&quot;user.user_id&quot;)
+    receiver_id: int = Field(foreign_key=&quot;user.user_id&quot;)
+    sender_book_id: int = Field(foreign_key=&quot;userbook.user_book_id&quot;)
+    desired_book_id: int = Field(foreign_key=&quot;userbook.user_book_id&quot;)
+    status: str  # pending / accepted / rejected
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    message: Optional[str] = None
+
+    sender: &quot;User&quot; = Relationship(back_populates=&quot;sent_requests&quot;, sa_relationship_kwargs={&quot;foreign_keys&quot;: &quot;[ExchangeRequest.sender_id]&quot;})
+    receiver: &quot;User&quot; = Relationship(back_populates=&quot;received_requests&quot;, sa_relationship_kwargs={&quot;foreign_keys&quot;: &quot;[ExchangeRequest.receiver_id]&quot;})
+    sender_book: &quot;UserBook&quot; = Relationship(back_populates=&quot;sender_requests&quot;, sa_relationship_kwargs={&quot;foreign_keys&quot;: &quot;[ExchangeRequest.sender_book_id]&quot;})
+    desired_book: &quot;UserBook&quot; = Relationship(back_populates=&quot;receiver_requests&quot;, sa_relationship_kwargs={&quot;foreign_keys&quot;: &quot;[ExchangeRequest.desired_book_id]&quot;})
+    exchange: Optional[&quot;Exchange&quot;] = Relationship(back_populates=&quot;request&quot;)
+
+
+# ---------- EXCHANGE ----------
+class Exchange(SQLModel, table=True):
+    exchange_id: Optional[int] = Field(default=None, primary_key=True)
+    request_id: int = Field(foreign_key=&quot;exchangerequest.request_id&quot;, unique=True)
+    exchange_date: datetime = Field(default_factory=datetime.utcnow)
+    completion_status: str  # в процессе / завершен
+    user1_rating: Optional[int] = None
+    user2_rating: Optional[int] = None
+    feedback: Optional[str] = None
+
+    request: &quot;ExchangeRequest&quot; = Relationship(back_populates=&quot;exchange&quot;)
 </code></pre>
-<p>Ни в коем случае нельзя хранить в репозитории чувствительные данные, поэтому они занесены в отдельный файл terraform.tfvars, который добавлен в gitignore.</p>
-<p><strong>Применяю команду terraform init</strong>
-<img alt="Работа terraform init" src="images/terraforminit.png" /></p>
-<p><strong>Применяю команду terraform plan и затем terraform apply</strong>
-<img alt="Работа terraform plan" src="images/terraformplan.png" /></p>
-<p>После этого развернулось 2 машины с атрибутом прерываемый и файл inventory.tmpl
-<img alt="2 вм" src="images/servers.png" /></p>
-<p>Загружаемый диск с ubuntu 22.04, 1CPU 2 gb RAM, Диск объем 10гб на каждую вм
-<img alt="параметры вм" src="images/comp.png" />
-<img alt="параметры вм" src="images/comp2.png" /></p>
-<h2 id="ansible">Ansible</h2>
-<p>Запускаю playbook командой ansible-playbook -i inventory.ini playbook.yml</p>
-<p><img alt="Playbook" src="images/playbookfinished.png" /></p>
-<p>Теперь наше приложение доступно по публичному ip-адресу
-<img alt="параметры вм" src="images/finished%20work.png" /></p>
 
 
 
