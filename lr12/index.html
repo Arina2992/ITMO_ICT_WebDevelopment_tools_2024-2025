@@ -406,9 +406,9 @@
 по пути http://127.0.0.1:8000/docs
 <img alt="" src="../images/docs.png" /></p>
 <h2 id="_2">Эндпоинты</h2>
-<p>Создаю папку api
-<img alt="" src="../images/api.png" />
-<strong>Пример кода из файла books.py</strong></p>
+<p>Создаю папку api</p>
+<p><img alt="" src="../images/api.png" /></p>
+<p><strong>Пример кода из файла books.py</strong></p>
 <pre><code class="language-python">from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
 from typing import List
@@ -486,9 +486,9 @@ def delete_book(
     session.commit()
     return {&quot;ok&quot;: True}
 </code></pre>
-<p>Создаю папку schemas
-<img alt="" src="../images/schemas.png" />
-<strong>Пример кода из файла book.py</strong></p>
+<p>Создаю папку schemas</p>
+<p><img alt="" src="../images/schemas.png" /></p>
+<p><strong>Пример кода из файла book.py</strong></p>
 <pre><code class="language-python">from pydantic import BaseModel
 from typing import Optional
 
@@ -520,14 +520,14 @@ class BookUpdate(BaseModel):
     description: Optional[str] = None
 </code></pre>
 <h2 id="_3">Пример работы энпоинтов</h2>
-<p>Просмотр юзера
-<img alt="" src="../images/readuser.png" />
-Создание книги
-<img alt="" src="../images/createbook.png" />
-Регистрация
-<img alt="" src="../images/register.png" />
-Получение токена
-<img alt="" src="../images/token.png" /></p>
+<p>Просмотр юзера</p>
+<p><img alt="" src="../images/readuser.png" /></p>
+<p>Создание книги</p>
+<p><img alt="" src="../images/createbook.png" /></p>
+<p>Регистрация</p>
+<p><img alt="" src="../images/register.png" /></p>
+<p>Получение токена</p>
+<p><img alt="" src="../images/token.png" /></p>
 
 
 
