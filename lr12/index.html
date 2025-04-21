@@ -520,14 +520,31 @@ class BookUpdate(BaseModel):
     description: Optional[str] = None
 </code></pre>
 <h2 id="_3">Пример работы энпоинтов</h2>
-<p>Просмотр юзера</p>
-<p><img alt="" src="../images/readuser.png" /></p>
-<p>Создание книги</p>
-<p><img alt="" src="../images/createbook.png" /></p>
 <p>Регистрация</p>
 <p><img alt="" src="../images/register.png" /></p>
 <p>Получение токена</p>
 <p><img alt="" src="../images/token.png" /></p>
+<p>GET /me</p>
+<p><img alt="" src="../images/me.jpg" /></p>
+<p>PATCH /users</p>
+<p><img alt="" src="../images/patch.jpg" /></p>
+<p>POST /books</p>
+<p><img alt="" src="../images/postbooks.jpg" /></p>
+<p>POST /user-books</p>
+<p><img alt="" src="../images/userbooks.jpg" /></p>
+<p>PATCH /user-book/id</p>
+<p><img alt="" src="../images/patchuser.jpg" /></p>
+<p>POST /exchanges/requests</p>
+<p><img alt="" src="../images/ex.jpg" /></p>
+<p>GET /exchanges/requests
+по текущему авторизованному пользователю</p>
+<p><img alt="" src="../images/gett.jpg" /></p>
+<p>PATCH /exchanges/requests/id
+редактирует тот авторизованный пользователь, КОТОРОМУ отправили запрос на обмен</p>
+<p><img alt="" src="../images/req.jpg" /></p>
+<p>GET /exchanges
+когда статус обмена в патч-запросе меняется на accepted, создается новый экземпляр сущности Exchange</p>
+<p><img alt="" src="../images/acc.jpg" /></p>
 
 
 
